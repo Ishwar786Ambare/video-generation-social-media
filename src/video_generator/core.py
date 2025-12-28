@@ -7,21 +7,30 @@ import os
 from typing import Dict, List, Optional
 from .text_to_speech import TextToSpeech
 from .video_composer import VideoComposer
+from .content_generator import ContentGenerator
 
 
 class VideoGenerator:
     """Main class for generating videos for social media"""
     
-    def __init__(self, output_dir: str = "output_videos"):
+    def __init__(self, output_dir: str = "output_videos", enable_ai: bool = False):
         """
         Initialize the Video Generator
         
         Args:
             output_dir: Directory to save generated videos
+            enable_ai: Enable AI-powered content generation with Groq
         """
         self.output_dir = output_dir
         self.tts = TextToSpeech()
         self.composer = VideoComposer()
+        self.content_generator = None
+        
+        if enable_ai:
+            try:
+                self.content_generator = ContentGenerator()
+            except ValueError as e:
+                print(f"Warning: AI content generation disabled - {e}")
         
         # Create output directory if it doesn't exist
         os.makedirs(output_dir, exist_ok=True)
@@ -107,6 +116,71 @@ class VideoGenerator:
         settings = platform_defaults.get(platform.lower(), platform_defaults["youtube"])
         settings.update(kwargs)
         return settings
+    
+    def generate_video_from_topic(
+        self,
+        topic: str,
+        title: str,
+        duration: int = 60,
+        style: str = "informative",
+        images: Optional[List[str]] = None,
+        background_music: Optional[str] = None,
+        platform: str = "youtube",
+        **kwargs
+    ) -> Dict[str, str]:
+        """
+        Generate a complete video from a topic using AI content generation
+        
+        Args:
+            topic: Main topic for the video
+            title: Video title
+            duration: Target duration in seconds
+            style: Content style (informative, entertaining, educational, promotional)
+            images: List of image paths to include
+            background_music: Path to background music file
+            platform: Target platform (youtube, facebook, instagram)
+            **kwargs: Additional platform-specific parameters
+            
+        Returns:
+            Dictionary containing video_path, script, and description
+            
+        Raises:
+            RuntimeError: If AI content generation is not enabled
+        """
+        if not self.content_generator:
+            raise RuntimeError(
+                "AI content generation is not enabled. Initialize VideoGenerator with enable_ai=True"
+            )
+        
+        print(f"Generating script for topic: {topic}...")
+        script = self.content_generator.generate_script(
+            topic=topic,
+            duration=duration,
+            style=style,
+            platform=platform
+        )
+        
+        print(f"Generating description...")
+        description = self.content_generator.generate_description(
+            script=script,
+            platform=platform
+        )
+        
+        print(f"Creating video...")
+        video_path = self.generate_video(
+            script=script,
+            title=title,
+            images=images,
+            background_music=background_music,
+            platform=platform,
+            **kwargs
+        )
+        
+        return {
+            "video_path": video_path,
+            "script": script,
+            "description": description
+        }
     
     def batch_generate(
         self,

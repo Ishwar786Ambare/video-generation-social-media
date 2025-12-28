@@ -1,11 +1,14 @@
 # Video Generation Dependencies
 moviepy==1.0.3
-Pillow==10.2.0
-numpy==1.24.3
+Pillow>=10.4.0
+numpy>=1.26.0
 
 # Text-to-Speech
 gTTS==2.5.0
 pydub==0.25.1
+
+# AI Content Generation
+groq==0.13.0
 
 # Social Media APIs
 google-api-python-client==2.108.0

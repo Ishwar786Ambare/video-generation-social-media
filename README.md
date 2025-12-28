@@ -2,22 +2,37 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Powered by Groq](https://img.shields.io/badge/AI-Groq-brightgreen.svg)](https://groq.com/)
 
-A comprehensive Python toolkit for **automated video generation and distribution** across YouTube, Facebook, and Instagram. Create engaging videos from text scripts with text-to-speech, image composition, and automated uploads to social media platforms.
+A comprehensive Python toolkit for **automated video generation and distribution** across YouTube, Facebook, and Instagram. Create engaging videos from text scripts with AI-powered content generation, text-to-speech, image composition, and automated uploads to social media platforms.
 
 ## ✨ Features
 
+- 🤖 **AI Content Generation**: Generate video scripts and ideas using Groq AI (replaces Gemini)
 - 🎤 **Text-to-Speech**: Convert scripts to natural-sounding audio using gTTS
 - 🎨 **Video Composition**: Combine images, audio, and background music
 - 📱 **Multi-Platform Support**: Upload to YouTube, Facebook, and Instagram
 - ⚙️ **Platform Optimization**: Automatic resolution and format adjustments
 - 🔄 **Batch Processing**: Generate multiple videos at once
+- 💡 **Smart Content**: AI-powered script enhancement and video ideas
 - 🎯 **Easy Configuration**: Simple, intuitive API
+
+## 🆕 NEW: Groq AI Integration
+
+This project now uses **Groq AI** for lightning-fast content generation! No more Gemini dependency.
+
+- ⚡ Super fast inference speeds
+- 🎯 High-quality content generation
+- 💰 Generous free tier
+- 🔧 Easy to configure
+
+See the [Groq Guide](docs/GROQ_GUIDE.md) for detailed setup instructions.
 
 ## 📋 Table of Contents
 
 - [Installation](#installation)
 - [Quick Start](#quick-start)
+- [AI Content Generation](#ai-content-generation)
 - [Video Generation](#video-generation)
 - [Social Media Upload](#social-media-upload)
   - [YouTube](#youtube-upload)
@@ -36,6 +51,7 @@ A comprehensive Python toolkit for **automated video generation and distribution
 
 - Python 3.8 or higher
 - FFmpeg (required for video processing)
+- Groq API Key (free at https://console.groq.com/)
 
 #### Install FFmpeg
 
@@ -66,9 +82,37 @@ cd video-generation-social-media
 pip install -r requirements.txt
 ```
 
+3. Configure environment variables:
+```bash
+cp .env.example .env
+# Edit .env and add your API keys (especially GROQ_API_KEY)
+```
+
 ## 🎯 Quick Start
 
-### Generate a Simple Video
+### Option 1: AI-Powered Video Generation (NEW!)
+
+```python
+from src.video_generator import VideoGenerator
+
+# Initialize with AI enabled
+generator = VideoGenerator(enable_ai=True)
+
+# Generate video from just a topic - AI does the rest!
+result = generator.generate_video_from_topic(
+    topic="The benefits of morning exercise",
+    title="morning_exercise",
+    duration=60,
+    style="informative",
+    platform="youtube"
+)
+
+print(f"Video: {result['video_path']}")
+print(f"AI-Generated Script: {result['script']}")
+print(f"AI-Generated Description: {result['description']}")
+```
+
+### Option 2: Traditional Manual Script
 
 ```python
 from src.video_generator import VideoGenerator
@@ -92,6 +136,46 @@ video_path = generator.generate_video(
 
 print(f"Video created: {video_path}")
 ```
+
+## 🤖 AI Content Generation
+
+### Generate Video Ideas
+
+```python
+from src.video_generator.content_generator import ContentGenerator
+
+content_gen = ContentGenerator()
+
+# Get AI-generated video ideas
+ideas = content_gen.generate_video_ideas(
+    niche="productivity tips",
+    count=5,
+    platform="youtube"
+)
+
+for idea in ideas:
+    print(f"{idea['title']}: {idea['description']}")
+```
+
+### Generate Custom Scripts
+
+```python
+# Generate a script from a topic
+script = content_gen.generate_script(
+    topic="5 morning habits for success",
+    duration=90,
+    style="motivational",
+    platform="instagram"
+)
+
+# Enhance existing scripts
+enhanced = content_gen.enhance_script(
+    script=script,
+    enhancement_type="engagement"  # engagement, clarity, emotion, brevity
+)
+```
+
+For more AI features, see [docs/GROQ_GUIDE.md](docs/GROQ_GUIDE.md)
 
 ## 🎬 Video Generation
 
