@@ -89,7 +89,7 @@ class VideoComposer:
         # Clean up
         audio.close()
         final_video.close()
-        if background_music and 'bg_music' in locals():
+        if background_music:
             bg_music.close()
         
         return output_path
@@ -146,7 +146,14 @@ class VideoComposer:
         img = img.convert('RGB')
         
         # Calculate scaling to fit within target size
-        img.thumbnail(target_size, Image.Resampling.LANCZOS)
+        try:
+            # Use LANCZOS for better quality (Pillow 10+)
+            resample_filter = Image.Resampling.LANCZOS
+        except AttributeError:
+            # Fallback for older Pillow versions
+            resample_filter = Image.LANCZOS
+        
+        img.thumbnail(target_size, resample_filter)
         
         # Create a new image with target size and paste resized image
         new_img = Image.new('RGB', target_size, (0, 0, 0))
