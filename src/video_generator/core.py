@@ -13,16 +13,22 @@ from .content_generator import ContentGenerator
 class VideoGenerator:
     """Main class for generating videos for social media"""
     
-    def __init__(self, output_dir: str = "output_videos", enable_ai: bool = False):
+    def __init__(
+        self,
+        output_dir: str = "output_videos",
+        enable_ai: bool = False,
+        language: str = "hi",
+    ):
         """
         Initialize the Video Generator
         
         Args:
             output_dir: Directory to save generated videos
             enable_ai: Enable AI-powered content generation with Groq
+            language: Default language code for text-to-speech (defaults to "hi")
         """
         self.output_dir = output_dir
-        self.tts = TextToSpeech()
+        self.tts = TextToSpeech(language=language)
         self.composer = VideoComposer()
         self.content_generator = None
         
@@ -67,7 +73,7 @@ class VideoGenerator:
         print("Generating audio from script...")
         audio_path = self.tts.generate_speech(
             text=script,
-            output_path=os.path.join(self.output_dir, f"{title}_audio.mp3")
+            output_path=os.path.join(self.output_dir, f"{title}_audio.mp3"),
         )
         
         # Compose video
