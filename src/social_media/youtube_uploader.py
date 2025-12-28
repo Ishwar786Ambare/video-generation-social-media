@@ -118,11 +118,24 @@ class YouTubeUploader:
         
         print(f"Uploading video: {title}")
         response = None
+        error = None
+        retry_count = 0
+        max_retries = 5
+        
         while response is None:
-            status, response = request.next_chunk()
-            if status:
-                progress = int(status.progress() * 100)
-                print(f"Upload progress: {progress}%")
+            try:
+                status, response = request.next_chunk()
+                if status:
+                    progress = int(status.progress() * 100)
+                    print(f"Upload progress: {progress}%")
+            except Exception as e:
+                error = e
+                retry_count += 1
+                if retry_count >= max_retries:
+                    raise Exception(f"Upload failed after {max_retries} retries: {error}")
+                print(f"Upload error, retrying ({retry_count}/{max_retries})...")
+                # Reset for retry
+                response = None
         
         video_id = response['id']
         print(f"Video uploaded successfully! Video ID: {video_id}")

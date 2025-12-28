@@ -89,7 +89,7 @@ class VideoComposer:
         # Clean up
         audio.close()
         final_video.close()
-        if background_music:
+        if background_music and 'bg_music' in locals():
             bg_music.close()
         
         return output_path
@@ -197,6 +197,9 @@ class VideoComposer:
         """
         Add subtitles to video
         
+        Note: This feature requires additional implementation.
+        Consider using libraries like moviepy's TextClip or pysrt.
+        
         Args:
             video_path: Path to input video
             subtitles: List of subtitle dicts with 'text', 'start', 'end'
@@ -204,8 +207,11 @@ class VideoComposer:
             
         Returns:
             Path to video with subtitles
+            
+        Raises:
+            NotImplementedError: This feature is not yet implemented
         """
-        # This is a placeholder for subtitle functionality
-        # In production, you'd use libraries like moviepy's TextClip
-        print("Subtitle feature - requires additional implementation")
-        return video_path
+        raise NotImplementedError(
+            "Subtitle functionality is not yet implemented. "
+            "Consider using moviepy.video.tools.subtitles or similar libraries."
+        )
