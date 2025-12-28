@@ -1,0 +1,75 @@
+{
+  "news_api": {
+    "api_key": "YOUR_NEWSAPI_KEY_HERE",
+    "sources": ["bbc-news", "cnn", "techcrunch"],
+    "categories": ["technology", "business", "general"],
+    "language": "en",
+    "max_articles": 20
+  },
+  
+  "rss_feeds": [
+    "http://feeds.bbci.co.uk/news/rss.xml",
+    "http://rss.cnn.com/rss/edition.rss",
+    "https://feeds.feedburner.com/TechCrunch/"
+  ],
+  
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration_per_article": 10,
+    "max_articles_per_video": 5,
+    "background_color": [0, 51, 102],
+    "text_color": [255, 255, 255],
+    "font_size": 50
+  },
+  
+  "tts": {
+    "engine": "gtts",
+    "language": "en",
+    "speed": 1.0
+  },
+  
+  "youtube": {
+    "credentials_file": "credentials/youtube_credentials.json",
+    "enabled": true,
+    "title_template": "Daily News Summary - {date}",
+    "description_template": "Automated daily news compilation featuring top stories from around the world.\n\nTopics covered:\n{topics}\n\n#news #dailynews #automated",
+    "tags": ["news", "daily news", "world news", "breaking news"],
+    "category": "25",
+    "privacy": "public"
+  },
+  
+  "instagram": {
+    "username": "YOUR_INSTAGRAM_USERNAME",
+    "password": "YOUR_INSTAGRAM_PASSWORD",
+    "enabled": false,
+    "upload_as": "reel",
+    "caption_template": "Daily News Summary 📰\n\n{topics}\n\n#news #dailynews #breakingnews"
+  },
+  
+  "facebook": {
+    "app_id": "YOUR_FACEBOOK_APP_ID",
+    "app_secret": "YOUR_FACEBOOK_APP_SECRET",
+    "access_token": "YOUR_FACEBOOK_ACCESS_TOKEN",
+    "page_id": "",
+    "enabled": false,
+    "title_template": "Daily News Summary - {date}",
+    "description_template": "Top news stories from around the world"
+  },
+  
+  "database": {
+    "path": "news_data/news.db"
+  },
+  
+  "output": {
+    "video_directory": "output/videos",
+    "temp_directory": "temp"
+  },
+  
+  "schedule": {
+    "enabled": false,
+    "time": "09:00",
+    "timezone": "UTC"
+  }
+}

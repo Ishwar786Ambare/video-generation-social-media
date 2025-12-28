@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Project specific
+config.json
+*.db
+*.sqlite
+*.sqlite3
+news_data/
+videos/
+output/
+temp/
+logs/
+*.log
+
+# Media files
+*.mp4
+*.mp3
+*.wav
+*.jpg
+*.jpeg
+*.png
+
+# Credentials
+credentials.json
+token.json
+*.pem
+*.key
+client_secrets.json
+
+# OS
+.DS_Store
+Thumbs.db
