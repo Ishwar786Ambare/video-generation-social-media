@@ -65,7 +65,7 @@ class RSSFetcher:
                 if time_struct:
                     try:
                         return datetime(*time_struct[:6])
-                    except:
+                    except (ValueError, TypeError, AttributeError):
                         pass
         
         return datetime.utcnow()

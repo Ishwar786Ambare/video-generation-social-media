@@ -13,11 +13,12 @@ logger = logging.getLogger(__name__)
 class FacebookUploader:
     """Uploads videos to Facebook."""
     
-    def __init__(self, app_id: str, app_secret: str, access_token: str):
+    def __init__(self, app_id: str, app_secret: str, access_token: str, api_version: str = "v18.0"):
         """Initialize Facebook uploader."""
         self.app_id = app_id
         self.app_secret = app_secret
         self.access_token = access_token
+        self.api_version = api_version
         self.graph = facebook.GraphAPI(access_token=access_token)
     
     def upload_video(self, video_path: str, title: str, description: str,
@@ -77,9 +78,9 @@ class FacebookUploader:
             
             # Determine upload endpoint
             if page_id:
-                endpoint = f"https://graph-video.facebook.com/v18.0/{page_id}/videos"
+                endpoint = f"https://graph-video.facebook.com/{self.api_version}/{page_id}/videos"
             else:
-                endpoint = "https://graph-video.facebook.com/v18.0/me/videos"
+                endpoint = f"https://graph-video.facebook.com/{self.api_version}/me/videos"
             
             # Start upload session
             start_params = {

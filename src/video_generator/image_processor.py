@@ -46,8 +46,22 @@ class ImageProcessor:
         
         # Try to load a font, fallback to default if not available
         try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
-        except:
+            # Try common font paths for different OS
+            font_paths = [
+                "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
+                "/System/Library/Fonts/Helvetica.ttc",  # macOS
+                "C:\\Windows\\Fonts\\arial.ttf"  # Windows
+            ]
+            font = None
+            for font_path in font_paths:
+                try:
+                    font = ImageFont.truetype(font_path, font_size)
+                    break
+                except (OSError, IOError):
+                    continue
+            if font is None:
+                font = ImageFont.load_default()
+        except Exception:
             font = ImageFont.load_default()
         
         # Wrap text if max_width is specified

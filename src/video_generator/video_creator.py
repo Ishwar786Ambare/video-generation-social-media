@@ -26,12 +26,16 @@ class VideoCreator:
         self.image_processor = ImageProcessor(width, height)
         self.tts = TextToSpeech()
     
+    def _ensure_directories(self, *dirs):
+        """Ensure directories exist."""
+        for directory in dirs:
+            os.makedirs(directory, exist_ok=True)
+    
     def create_news_video(self, articles: List[Dict], output_path: str,
                          duration_per_article: int = 10) -> str:
         """Create a video from news articles."""
         try:
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            os.makedirs("temp", exist_ok=True)
+            self._ensure_directories(os.path.dirname(output_path), "temp")
             
             clips = []
             
@@ -102,8 +106,7 @@ class VideoCreator:
                            duration: int = 30) -> str:
         """Create a simple video with title and description."""
         try:
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            os.makedirs("temp", exist_ok=True)
+            self._ensure_directories(os.path.dirname(output_path), "temp")
             
             # Create background image
             bg_path = "temp/simple_bg.png"

@@ -29,7 +29,7 @@ class Database:
     def get_unused_articles(self, limit: int = 10) -> List[NewsArticle]:
         """Get articles that haven't been used in videos yet."""
         return self.session.query(NewsArticle).filter(
-            NewsArticle.used_in_video == False
+            NewsArticle.used_in_video.is_(False)
         ).order_by(desc(NewsArticle.published_at)).limit(limit).all()
     
     def mark_article_used(self, article_id: int, video_id: str = None):
