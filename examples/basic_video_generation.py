@@ -23,6 +23,11 @@ def main():
     for social media platforms using Python.
     This is a powerful way to automate your content creation workflow
     and save hours of manual work.
+
+    अब यह उदाहरण हिंदी में भी उपलब्ध है।
+    हम दिखाएंगे कि स्वचालित वीडियो जनरेशन कितनी सरल है।
+    Python और टेक्स्ट-टू-स्पीच की मदद से आप हिंदी में आकर्षक वीडियो बना सकते हैं।
+
     """
     
     # Generate video
