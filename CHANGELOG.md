@@ -65,11 +65,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Dependencies
 - moviepy 1.0.3 - Video editing
-- Pillow 10.1.0 - Image processing
+- Pillow 10.2.0 - Image processing (security update)
 - gTTS 2.5.0 - Text-to-speech
 - google-api-python-client 2.108.0 - YouTube API
-- facebook-sdk 3.1.0 - Facebook API
 - instagrapi 2.0.0 - Instagram API
+- requests 2.31.0 - HTTP client for Facebook Graph API
 
 ## [Unreleased]
 
