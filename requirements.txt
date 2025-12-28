@@ -1,0 +1,30 @@
+# Video Generation Dependencies
+moviepy==1.0.3
+Pillow>=10.4.0
+numpy>=1.26.0
+
+# Text-to-Speech (Edge neural voices)
+edge-tts==7.2.7
+pydub==0.25.1
+aiohttp==3.13.2
+aiosignal==1.4.0
+yarl==1.22.0
+multidict==6.7.0
+
+# AI Content Generation
+groq==0.13.0
+
+# Social Media APIs
+google-api-python-client==2.108.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+instagrapi==2.0.0
+
+# Configuration and Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+
+# Optional: For advanced features
+opencv-python==4.8.1.78
+imageio==2.33.1
+imageio-ffmpeg==0.4.9
