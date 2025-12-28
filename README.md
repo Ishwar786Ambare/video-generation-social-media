@@ -548,3 +548,11 @@ For questions and support, please open an issue on GitHub.
 ---
 
 **Happy video generating! 🎬**
+
+
+```
+& .\.venv\Scripts\python.exe -m pip install -U pip setuptools wheel; `
+& .\.venv\Scripts\python.exe -m pip install -U edge-tts aiohttp aiosignal yarl multidict; `
+& .\.venv\Scripts\python.exe -c "import asyncio,edge_tts; print('edge_tts',edge_tts.__version__); print(asyncio.run(edge_tts.list_voices())[:1])"
+
+```
